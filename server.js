@@ -11,8 +11,6 @@ const client = new OpenAI({
 });
 
 app.post("/chat", async (req, res) => {
- console.log("RECIBÍ UN MENSAJE:", req.body.message);  
- 
     try {
         const mensaje = req.body.message;
 
@@ -26,14 +24,16 @@ app.post("/chat", async (req, res) => {
         });
 
     } catch (error) {
-        console.error(error);
+        console.error("ERROR OPENAI:", error);
 
         res.status(500).json({
-            reply: "Lo siento, ocurrió un error al conectar mi mente."
+            reply: "No pude conectar con mi mente: " + error.message
         });
     }
 });
 
-app.listen(3000, () => {
-    console.log("Harvix está funcionando en el puerto 3000");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Harvix está funcionando en el puerto ${PORT}`);
 });
