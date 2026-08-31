@@ -1,0 +1,195 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #03070d;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px 20px;
+}
+
+/* CÍRCULO DE HARVIX */
+
+.orb-container {
+    margin-top: 40px;
+    width: 220px;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#orb {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid #00eaff;
+
+    box-shadow:
+        0 0 15px #00eaff,
+        0 0 40px #0077ff,
+        0 0 80px #004cff;
+
+    transition: transform 0.15s ease;
+
+    animation: respirar 3s infinite ease-in-out;
+}
+
+.orb-core {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #061522;
+
+    color: #00eaff;
+    font-size: 45px;
+    font-weight: bold;
+
+    box-shadow:
+        inset 0 0 25px #00eaff,
+        0 0 25px #00eaff;
+}
+
+@keyframes respirar {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.06);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* CUANDO HARVIX ESCUCHA */
+
+#orb.escuchando {
+    animation: escuchar 0.5s infinite alternate;
+}
+
+@keyframes escuchar {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.18);
+    }
+}
+
+/* TÍTULO */
+
+h1 {
+    margin: 10px 0 4px;
+
+    color: #00eaff;
+
+    font-size: 30px;
+    letter-spacing: 8px;
+
+    text-shadow:
+        0 0 10px #00eaff,
+        0 0 25px #0077ff;
+}
+
+.subtitle {
+    margin: 0 0 20px;
+
+    color: #65dfff;
+
+    font-size: 11px;
+    letter-spacing: 4px;
+}
+
+/* CHAT */
+
+#chat {
+    width: 100%;
+    max-width: 600px;
+
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 15px;
+
+    background: rgba(5, 20, 32, 0.7);
+
+    border: 1px solid #12384d;
+    border-radius: 18px;
+}
+
+.harvix-message {
+    color: #b9f7ff;
+}
+
+/* CONTROLES */
+
+.controls {
+    width: 100%;
+    max-width: 600px;
+
+    display: flex;
+    gap: 8px;
+
+    margin-top: 12px;
+}
+
+input {
+    flex: 1;
+
+    padding: 14px;
+
+    border: 1px solid #14506a;
+    border-radius: 14px;
+
+    outline: none;
+
+    background: #07131e;
+    color: white;
+
+    font-size: 15px;
+}
+
+button {
+    width: 48px;
+
+    border: none;
+    border-radius: 14px;
+
+    background: #008fba;
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.9);
+}
