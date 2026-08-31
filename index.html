@@ -1,61 +1,292 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harvix</title>
 
-    <title>HARVIX</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    <link rel="stylesheet" href="style.css">
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at center, #18243a 0%, #080b12 45%, #030407 100%);
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .app {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 5px;
+        }
+
+        .estado {
+            position: absolute;
+            top: 82px;
+            font-size: 13px;
+            color: #8c98aa;
+        }
+
+        .centro {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .orbe {
+            width: 230px;
+            height: 230px;
+            border-radius: 50%;
+
+            background:
+                radial-gradient(circle,
+                    #ffffff 0%,
+                    #b9d7ff 8%,
+                    #4d91ff 25%,
+                    #1a3d78 48%,
+                    #07101f 72%,
+                    transparent 73%);
+
+            box-shadow:
+                0 0 25px #4d91ff,
+                0 0 70px rgba(40,120,255,.5),
+                inset 0 0 45px rgba(255,255,255,.4);
+
+            animation: respirar 3s infinite ease-in-out;
+        }
+
+        @keyframes respirar {
+            0%,100% {
+                transform: scale(.94);
+                filter: brightness(.9);
+            }
+
+            50% {
+                transform: scale(1.04);
+                filter: brightness(1.3);
+            }
+        }
+
+        .orbe.hablando {
+            animation: hablar .7s infinite alternate ease-in-out;
+        }
+
+        @keyframes hablar {
+            from {
+                transform: scale(.96);
+            }
+
+            to {
+                transform: scale(1.08);
+            }
+        }
+
+        .texto {
+            margin-top: 35px;
+            color: #b8c1d0;
+            font-size: 17px;
+        }
+
+        .controles {
+            height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            color: white;
+        }
+
+        .boton {
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.12);
+            font-size: 25px;
+        }
+
+        .boton:hover {
+            background: rgba(255,255,255,.15);
+        }
+
+        .llamada {
+            width: 78px;
+            height: 78px;
+            border-radius: 50%;
+            background: #1769ff;
+            font-size: 30px;
+            box-shadow: 0 0 30px rgba(23,105,255,.6);
+        }
+
+        .llamada.activa {
+            background: #d83b3b;
+            box-shadow: 0 0 30px rgba(216,59,59,.5);
+        }
+
+        .llamadaPantalla {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at center, #142c4f 0%, #05080e 60%);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .llamadaPantalla.activa {
+            display: flex;
+        }
+
+        .llamadaTitulo {
+            margin-bottom: 35px;
+            font-size: 20px;
+        }
+
+        .salir {
+            margin-top: 50px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #d83b3b;
+            font-size: 28px;
+            box-shadow: 0 0 30px rgba(216,59,59,.5);
+        }
+
+        .llamadaPantalla small {
+            margin-top: 15px;
+            color: #8995a7;
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="app">
+<div class="app">
 
-        <div class="orb-container">
-            <div id="orb">
-                <div class="orb-core">H</div>
-            </div>
+    <header>
+        <div class="logo">HARVIX</div>
+        <div class="estado">Tu asistente personal</div>
+    </header>
+
+    <main class="centro">
+
+        <div id="orbe" class="orbe"></div>
+
+        <div id="texto" class="texto">
+            Presiona el botón para hablar
         </div>
 
-        <h1>HARVIX</h1>
+    </main>
 
-        <p class="subtitle">
-            ASISTENTE PERSONAL
-        </p>
+    <div class="controles">
 
-        <div id="chat">
+        <button class="boton" onclick="abrirLlamada()">
+            📞
+        </button>
 
-            <p class="harvix-message">
-                Hola. Soy Harvix.
-            </p>
+        <button id="microfono" class="llamada" onclick="abrirLlamada()">
+            🎙️
+        </button>
 
-        </div>
-
-        <div class="controls">
-
-            <input
-                id="userInput"
-                type="text"
-                placeholder="Habla con Harvix..."
-            >
-
-            <button id="sendButton">
-                ➤
-            </button>
-
-            <button id="micButton">
-                🎙️
-            </button>
-
-        </div>
+        <button class="boton" onclick="activarEscritura()">
+            ⌨️
+        </button>
 
     </div>
 
-    <script src="app.js"></script>
+</div>
+
+
+<!-- PANTALLA DE LLAMADA -->
+
+<div id="pantallaLlamada" class="llamadaPantalla">
+
+    <div class="llamadaTitulo">
+        Llamando a Harvix
+    </div>
+
+    <div id="orbeLlamada" class="orbe hablando"></div>
+
+    <div id="estadoLlamada" class="texto">
+        Escuchando...
+    </div>
+
+    <button class="salir" onclick="salirLlamada()">
+        📞
+    </button>
+
+    <small>
+        Toca para finalizar
+    </small>
+
+</div>
+
+
+<script>
+
+    const pantallaLlamada =
+        document.getElementById("pantallaLlamada");
+
+    const estadoLlamada =
+        document.getElementById("estadoLlamada");
+
+    function abrirLlamada() {
+
+        pantallaLlamada.classList.add("activa");
+
+        estadoLlamada.textContent =
+            "Escuchando...";
+
+        // Aquí después conectaremos
+        // el reconocimiento de voz.
+    }
+
+    function salirLlamada() {
+
+        pantallaLlamada.classList.remove("activa");
+
+        estadoLlamada.textContent =
+            "Llamada terminada";
+    }
+
+    function activarEscritura() {
+
+        alert(
+            "Aquí conectaremos el chat de texto de Harvix."
+        );
+    }
+
+</script>
 
 </body>
-
 </html>
