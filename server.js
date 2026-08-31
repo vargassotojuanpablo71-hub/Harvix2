@@ -11,6 +11,8 @@ const client = new OpenAI({
 });
 
 app.post("/chat", async (req, res) => {
+ console.log("RECIBÍ UN MENSAJE:", req.body.message);  
+ 
     try {
         const mensaje = req.body.message;
 
